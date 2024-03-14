@@ -39,6 +39,14 @@ public class EventController {
 
     @PostMapping()
     public ResponseEntity<Object> save(@RequestBody Event event, @RequestBody User user){
-        return null;
+        try{
+            if(user.isAdmin()){
+                return null;
+            }else{
+                return ResponseHandler.generateResponse("User is not admin", HttpStatus.CONFLICT,null);
+            }
+        }catch(Exception e){
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
+        }
     }
 }

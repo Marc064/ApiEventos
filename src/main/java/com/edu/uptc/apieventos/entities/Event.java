@@ -1,9 +1,12 @@
 package com.edu.uptc.apieventos.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -28,7 +31,12 @@ public class Event implements Serializable {
     @Column(nullable = false)
     private Integer id_User;
 
+    @OneToMany(mappedBy = "event")
+    @JsonIgnore
+    private List<Assistant> assistants;
+
     public Event() {
+        assistants = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -77,5 +85,13 @@ public class Event implements Serializable {
 
     public void setId_User(Integer id_User) {
         this.id_User = id_User;
+    }
+
+    public List<Assistant> getAssistants() {
+        return assistants;
+    }
+
+    public void setAssistants(List<Assistant> assistants) {
+        this.assistants = assistants;
     }
 }
