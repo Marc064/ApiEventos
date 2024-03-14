@@ -26,4 +26,23 @@ public class EventService {
     public Event save (Event event){
         return eventRepository.save(event);
     }
+
+    public List<Event> getEventsById(List<Integer> eventsId){
+        return eventRepository.findAllById(eventsId);
+    }
+
+    public void delete(Event event){
+        if(event != null){
+            eventRepository.delete(event);
+        }
+    }
+
+    public Event update(Event event){
+        Optional<Event> existengEventOptional=eventRepository.findById(event.getId());
+        if(existengEventOptional.isPresent()){
+            Event existingEvent=existengEventOptional.get();
+
+        }
+    }
+
 }
