@@ -3,19 +3,24 @@ package com.edu.uptc.apieventos.entities;
 public class User {
 
     private Integer id;
-    private boolean isAdmin;
+    private String admin;
 
-    public User(Integer id, boolean isAdmin) {
-        this.id = id;
-        this.isAdmin = isAdmin;
+    public User() {
     }
 
     public Integer getId() {
         return id;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
 }

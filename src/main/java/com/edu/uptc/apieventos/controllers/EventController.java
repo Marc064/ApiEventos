@@ -1,6 +1,7 @@
 package com.edu.uptc.apieventos.controllers;
 
 import com.edu.uptc.apieventos.entities.Event;
+import com.edu.uptc.apieventos.entities.EventUserRequest;
 import com.edu.uptc.apieventos.entities.User;
 import com.edu.uptc.apieventos.responses.ResponseHandler;
 import com.edu.uptc.apieventos.services.EventService;
@@ -38,15 +39,22 @@ public class EventController {
     }
 
     @PostMapping()
-    public ResponseEntity<Object> save(@RequestBody Event event, @RequestBody User user){
-        try{
-            if(user.isAdmin()){
-                return null;
-            }else{
-                return ResponseHandler.generateResponse("User is not admin", HttpStatus.CONFLICT,null);
+    public ResponseEntity<Object> save(@RequestBody EventUserRequest eventUserRequest){
+        try {
+
+            Event event = eventUserRequest.getEvent();
+            User user = eventUserRequest.getUser();
+            System.out.println(eventUserRequest.getUser().getId());
+            if(user.getAdmin().equals("admin")) {
+                event.setId_User(user.getId());
+                Event result = eventService.save(event);
+                return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
+            } else {
+                return ResponseHandler.generateResponse("User is not admin", HttpStatus.CONFLICT, null);
             }
-        }catch(Exception e){
-            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null );
+        } catch(Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
+
 }
