@@ -1,4 +1,7 @@
 package com.edu.uptc.apieventos.repositories;
 
-public interface EventRepository {
+import com.edu.uptc.apieventos.entities.Event;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EventRepository extends JpaRepository<Event, Integer> {
 }

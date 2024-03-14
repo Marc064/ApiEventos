@@ -25,6 +25,8 @@ public class Event implements Serializable {
 
     @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    private Integer id_User;
 
     public Event() {
     }
@@ -67,5 +69,13 @@ public class Event implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getId_User() {
+        return id_User;
+    }
+
+    public void setId_User(Integer id_User) {
+        this.id_User = id_User;
     }
 }
