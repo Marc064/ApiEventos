@@ -27,7 +27,7 @@ public class AssistantService {
         return optional.isPresent() ? optional.get():null;
     }
 
-    public List<String> findEmaailsByEventsId(Integer eventId){
+    public List<String> findEmailsByEventsId(Integer eventId){
         return assistantRepository.findEmailsByEventId(eventId);
     }
     public Assistant save(Assistant assistant, Event event){

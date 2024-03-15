@@ -40,8 +40,8 @@ public class EventService {
     public Event update(Event event){
         Optional<Event> existingEventOptional=eventRepository.findById(event.getId());
         if(existingEventOptional.isPresent()){
-            Event updatedPet=eventRepository.save(event);
-            return updatedPet;
+            Event updateEvent = eventRepository.save(event);
+            return updateEvent;
         }
         return null;
     }
