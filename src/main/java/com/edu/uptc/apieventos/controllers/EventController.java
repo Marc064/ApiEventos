@@ -57,4 +57,38 @@ public class EventController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Integer id, @RequestBody User user){
+        try {
+
+            if(user.getAdmin().equals("admin")) {
+                Event event = eventService.findById(id);
+                eventService.delete(event);
+                return ResponseHandler.generateResponse("Success", HttpStatus.OK, event);
+            } else {
+                return ResponseHandler.generateResponse("User is not admin", HttpStatus.CONFLICT, null);
+            }
+        } catch(Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @PutMapping()
+    public ResponseEntity<Object> update(@RequestBody EventUserRequest eventUserRequest){
+        try {
+
+            Event event = eventUserRequest.getEvent();
+            User user = eventUserRequest.getUser();
+            if(user.getAdmin().equals("admin")) {
+                event.setId_User(user.getId());
+                Event result = eventService.update(event);
+                return ResponseHandler.generateResponse("Success", HttpStatus.OK, result);
+            } else {
+                return ResponseHandler.generateResponse("User is not admin", HttpStatus.CONFLICT, null);
+            }
+        } catch(Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
 }
