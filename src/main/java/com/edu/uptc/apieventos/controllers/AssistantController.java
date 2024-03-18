@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/assistant")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AssistantController {
     @Autowired
     private AssistantService assistantService;
